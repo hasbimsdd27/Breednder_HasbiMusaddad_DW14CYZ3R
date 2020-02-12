@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css?family=Sriracha&display=swap');
+
+
+.App-body {
+  background-image: url(./image/background.jpg);
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  font-family: 'Sriracha', cursive;
+}
+
+
+.App-jumbotron{
+  margin-top: 1vh;
+}
+
+.App-Card-Content-Main{
+  background:rgba(44, 62, 80,0.3);
+  width: 35vw;
+  padding-top: 1vh;
+  padding-left: 1vw;
+  padding-right: 1vw;
+  padding-bottom: 1vw;
+  text-align: center;
+  color: white;
+  font-size: 5vh;
+  margin-top: 3vh;
+}
+
+.App-text{
+  font-size: 2vh;
+  font-family: 'Roboto', sans-serif;
+  margin-bottom: 0vh;
+}
+
+
+.App-footer{
+  background:rgba(44, 62, 80,0.3);
+}
+
+.App-footer-text{
+  color: white;
+  padding-top: 1vh;
+  font-family: 'Roboto', sans-serif;
+
+}
+
+.App-btn{
+  font-family: 'Roboto', sans-serif;
+}
+
+.App-desc{
+  color: white;
+  font-size: 8vh;
+}
