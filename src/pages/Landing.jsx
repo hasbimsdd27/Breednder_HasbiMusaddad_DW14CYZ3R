@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Navbar, Nav, Jumbotron, Modal} from 'react-bootstrap';
+import { Button, Row, Col,Navbar, Nav, Jumbotron, Modal, Form, Card} from 'react-bootstrap';
 
 class Landing extends Component{
     constructor(){
@@ -55,27 +55,89 @@ class Landing extends Component{
                     <h6 className="App-footer-text text-center">Breednder © 2020</h6>
                 </Navbar >
 
-                <Modal show={this.state.showLog} >
-                    <Modal.Header>Modal Head</Modal.Header>
+                <Modal show={this.state.showLog} centered className="App-modal">
+                   
+                    <Modal.Header closeButton onClick={()=>{this.handleCloseModalLog()}}>
+                        <Modal.Title>Login</Modal.Title>
+                    </Modal.Header>
                     <Modal.Body>
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dignissimos, maxime.
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button onClick={()=>{this.handleCloseModalLog()}}>
-                            Close Modal
+                    
+                    <Form>
+                        <Form.Group controlId="formBasicEmail">
+                            <Form.Control type="email" placeholder="Enter email" />
+                        </Form.Group>
+
+                        <Form.Group controlId="formBasicPassword">
+                            <Form.Control type="password" placeholder="Password" />
+                        </Form.Group>
+                        <Button variant="success" className="btn btn-block" type="Submit">
+                            Login
                         </Button>
-                    </Modal.Footer>
+                      </Form>
+                    </Modal.Body>
+                    
                 </Modal>
-                <Modal show={this.state.showReg} >
-                    <Modal.Header>Modal Head</Modal.Header>
+
+
+                <Modal show={this.state.showReg} centered className="App-modal">
+                    <Modal.Header closeButton onClick={()=>{this.handleCloseModalReg()}}>
+                    <Modal.Title>Register Your Pet</Modal.Title>
+                    </Modal.Header>
+
                     <Modal.Body>
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dignissimos, maxime.
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button onClick={()=>{this.handleCloseModalReg()}}>
-                            Close Modal
+                        <Form>
+                        <Form.Group>
+                            <Form.Control type="text" placeholder="Breeder" name="breeder"/>
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Control type="email" placeholder="Email" name="email"/>
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Control type="password" placeholder="Password" name="pass"/>
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Control type="text" placeholder="Phone Number" name="phone"/>
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Control type="text" placeholder="Breeder Address" name="address"/>
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Control type="text" placeholder="Pet Name" name="pet"/>
+                        </Form.Group>
+                        <Form.Group >
+                            <Row>
+                                <Col>
+                                <Form.Label>Pet Gender</Form.Label>
+                                <Form.Control as="select" name="gender">
+                                <option>Male</option>
+                                <option>Female</option>
+                                </Form.Control>
+                                </Col><Col>
+                                <Form.Label>Pet Age</Form.Label>
+                                <Form.Control as="select" name="age">
+                                <option>Young</option>
+                                <option>Adult</option>
+                                <option>Old</option>
+                                </Form.Control>
+                                </Col>
+                                <Col>
+                                <Form.Label>Pet Species</Form.Label>
+                                <Form.Control as="select" name="species">
+                                <option>Cat</option>
+                                <option>Dog</option>
+                                <option>Owl</option>
+                                </Form.Control>
+                                </Col>
+                            </Row>
+                        </Form.Group>
+                    
+                       
+
+                        <Button variant="success" className="btn btn-block" type="Submit">
+                            Register
                         </Button>
-                    </Modal.Footer>
+                      </Form>
+                    </Modal.Body>
                 </Modal>
            </div>
         )

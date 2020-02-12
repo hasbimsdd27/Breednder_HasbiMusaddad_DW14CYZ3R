@@ -17,8 +17,8 @@ export default function App() {
           <Route path="/about">
             <About />
           </Route>
-          <Route path="/users">
-            <Users />
+          <Route path="/main">
+            <Main />
           </Route>
           <Route path="/">
             <LandingPage />
@@ -36,6 +36,6 @@ function About() {
   return <h2>About</h2>;
 }
 
-function Users() {
-  return <h2>Users</h2>;
+function Main() {
+  return <h2>Main</h2>;
 }

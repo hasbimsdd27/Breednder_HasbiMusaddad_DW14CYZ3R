@@ -53,3 +53,13 @@
   color: white;
   font-size: 8vh;
 }
+
+.App-modal{
+  background: rgba(44, 62, 80,0.7);
+  font-family: 'Roboto', sans-serif;
+}
+
+input, textarea{
+  background-color:#666;
+  color: #FFF;
+}
