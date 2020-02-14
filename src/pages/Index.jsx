@@ -1,6 +1,6 @@
 import React from "react";
 import { Navbar, Image, Row, Col, Card, Form, Button } from "react-bootstrap";
-import pets from "./swipe/data";
+import pets from "./swipe/dataMatch.json";
 import App from "./swipe/App";
 import { Link } from "react-router-dom";
 
@@ -15,13 +15,12 @@ export default function indexAPP() {
         >
           <Link to="/profile">
             <Image
-              src={process.env.PUBLIC_URL + "/image/ava1.jpg"}
+              src="https://images.unsplash.com/photo-1573865526739-10659fec78a5?ixlib=rb-1.2.1&auto=format&fit=crop&w=358&q=80"
               width="50px"
               height="50px"
               roundedCircle
             />
           </Link>
-
           <Form.Group
             style={{ paddingLeft: "1rem", paddingTop: "1rem" }}
             controlId="exampleForm.ControlSelect1"
@@ -36,6 +35,7 @@ export default function indexAPP() {
             </Form.Control>
           </Form.Group>
         </Navbar>
+        <h3 className="text-white ml-2 mt-2">Matched List</h3>
         <Row
           style={{
             paddingLeft: "1rem",
@@ -50,7 +50,7 @@ export default function indexAPP() {
         <App />
         <div
           style={{
-            marginTop: "75vh"
+            marginTop: "80vh"
           }}
         >
           <Row>
@@ -75,7 +75,7 @@ export default function indexAPP() {
                 className="container"
                 style={{
                   marginLeft: "4.5rem",
-                  marginTop: "2rem"
+                  marginTop: "0.5rem"
                 }}
               >
                 <Row>
@@ -143,13 +143,31 @@ export default function indexAPP() {
 function PetList(props) {
   return props.pets.map(pets => (
     <Col className="col-md-4 fluid">
-      <Card className="bg-transparent fluid" key={pets.id}>
-        <Card.Img
-          src={pets.pics}
-          style={{ size: "30%" }}
-          alt="Card image"
-          roundedCircle
-        />
+      <Card
+        className="bg-transparent fluid"
+        key={pets.index}
+        style={{
+          height: "10rem",
+          width: "7rem"
+        }}
+      >
+        <div
+          style={{
+            width: "100px",
+            height: "120px"
+          }}
+        >
+          <img
+            src={pets.pics}
+            style={{
+              width: "100%",
+              height: "100%"
+            }}
+            className="img-thumbnail"
+            alt="..."
+          ></img>
+        </div>
+
         <Card.Title className="text-white">
           <strong>{pets.name}</strong>
         </Card.Title>

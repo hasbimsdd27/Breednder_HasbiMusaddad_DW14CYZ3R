@@ -7,7 +7,6 @@ import {
   Col,
   Form,
   Button,
-  Carousel,
   Modal
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -36,9 +35,7 @@ function LeftBoxContent() {
       >
         <Link to="/main">
           <Image
-            src={
-              "https://png.pngtree.com/png-vector/20190129/ourlarge/pngtree-back-vector-icon-png-image_355813.jpg"
-            }
+            src="https://www.pngrepo.com/download/46477/left-chevron.png"
             width="50px"
             height="50px"
             roundedCircle
@@ -47,7 +44,7 @@ function LeftBoxContent() {
 
         <Image
           className="ml-3"
-          src={process.env.PUBLIC_URL + "/image/ava1.jpg"}
+          src="https://images.unsplash.com/photo-1573865526739-10659fec78a5?ixlib=rb-1.2.1&auto=format&fit=crop&w=358&q=80"
           width="50px"
           height="50px"
           roundedCircle
@@ -127,40 +124,6 @@ function LeftBoxContent() {
   );
 }
 
-function ControlledCarousel() {
-  const [index, setIndex] = useState(0);
-
-  const handleSelect = (selectedIndex, e) => {
-    setIndex(selectedIndex);
-  };
-
-  return (
-    <Carousel activeIndex={index} onSelect={handleSelect}>
-      <Carousel.Item>
-        <img
-          className="d-block w-100"
-          src={process.env.PUBLIC_URL + "/image/ava1.jpg"}
-          alt="First slide"
-        />
-      </Carousel.Item>
-      <Carousel.Item>
-        <img
-          className="d-block w-100"
-          src={process.env.PUBLIC_URL + "/image/ava1.jpg"}
-          alt="Second slide"
-        />
-      </Carousel.Item>
-      <Carousel.Item>
-        <img
-          className="d-block w-100"
-          src={process.env.PUBLIC_URL + "/image/ava1.jpg"}
-          alt="Third slide"
-        />
-      </Carousel.Item>
-    </Carousel>
-  );
-}
-
 function SliderInput() {
   const [state, setState] = useState({ x: 10, y: 10 });
 
@@ -196,65 +159,71 @@ function PetProfile(props) {
           Add Pet
         </Button>
       </Row>
-      <Card
-        style={{
-          width: "35vw",
-          margin: "0 auto",
-          float: "none",
-          marginBottom: "10px",
-          background: "white"
-        }}
-      >
-        <div>
-          <ControlledCarousel />
-        </div>
-        <div className="container">
-          <div className="card border mt-1 mb-1">
-            <div className="container mt-1">
-              <Row>
-                <Col>
-                  <h3>
-                    <strong>Pet Name</strong>
-                  </h3>
-                </Col>
-                <Col className="text-muted text-right">
-                  <h3>Pet Species</h3>
-                </Col>
-              </Row>
+      <div>
+        <Card
+          style={{
+            width: "35vw",
+            margin: "0 auto",
+            float: "none",
+            marginBottom: "2rem",
+            background: "white"
+          }}
+        >
+          <img
+            className="d-block w-100"
+            src="https://images.unsplash.com/photo-1573865526739-10659fec78a5?ixlib=rb-1.2.1&auto=format&fit=crop&w=358&q=80"
+            alt="First slide"
+          />
 
-              <h6>
-                Breeded by <strong>..Breeder</strong>
-              </h6>
-              <h6>
-                It's located about <strong>..km</strong> from you
-              </h6>
+          <div className="container">
+            <div className="card border mt-1 mb-1">
+              <div className="container mt-1">
+                <Row>
+                  <Col>
+                    <h3>
+                      <strong>Pet Name</strong>
+                    </h3>
+                  </Col>
+                  <Col className="text-muted text-right">
+                    <h3>Pet Species</h3>
+                  </Col>
+                </Row>
 
-              <h6>
-                It'a <strong>..Old.. ..gender..</strong> ..species
-              </h6>
-              <h6>
-                Wanna breed your pet with it? call me <strong>...Phone</strong>
-              </h6>
+                <h6>
+                  <i className="fas fa-user-alt mr-2"></i>
+                  <strong>..Breeder</strong>
+                </h6>
+                <h6>
+                  <i className="fas fa-map-marker-alt mr-2"></i>
+                  <strong>..km</strong> from you
+                </h6>
 
-              <h3 className="mt-3">
-                <strong>About Pet</strong>
-              </h3>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Corporis et quasi cum perspiciatis placeat exercitationem sequi
-                nostrum ipsam cumque qui.
-              </p>
+                <h6>
+                  <i className="fas fa-venus-mars  mr-2"></i>
+                  <strong>..Old..-..gender..</strong>
+                </h6>
+                <h6>
+                  <i className="fas fa-phone mr-2"></i>
+                  <strong>...Phone</strong>
+                </h6>
+
+                <h3 className="mt-3">
+                  <strong>About Pet</strong>
+                </h3>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Corporis et quasi cum perspiciatis placeat exercitationem
+                  sequi nostrum ipsam cumque qui.
+                </p>
+              </div>
             </div>
+
+            <Link to="/edit">
+              <Button className="btn btn-success btn-block mb-2">Edit</Button>
+            </Link>
           </div>
-          <Row>
-            <Col className="text-center">
-              <Link to="/edit">
-                <Button className="btn btn-success btn-block mb-2">Edit</Button>
-              </Link>
-            </Col>
-          </Row>
-        </div>
-      </Card>
+        </Card>
+      </div>
 
       <Modal show={showAdd} onHide={handleClose}>
         <Modal.Header closeButton></Modal.Header>
@@ -274,15 +243,25 @@ function PetProfile(props) {
               name="norek"
             />
           </Form.Group>
-          <label>Upload your screenshot</label>
-          <input type="file" />
+          <div className="custom-file">
+            <input
+              id="inputGroupFile01"
+              type="file"
+              className="custom-file-input"
+            />
+            <label className="custom-file-label" for="inputGroupFile01">
+              Upload Your Screenshot Here
+            </label>
+          </div>
         </Modal.Body>
 
         <Row className="mb-1">
           <Col className="text-center">
-            <Button className="btn btn-success btn-lg" onClick={handleClose}>
-              Send
-            </Button>
+            <Link to="/add">
+              <Button className="btn btn-success btn-lg" onClick={handleClose}>
+                Send
+              </Button>
+            </Link>
           </Col>
         </Row>
       </Modal>

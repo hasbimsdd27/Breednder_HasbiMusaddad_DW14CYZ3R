@@ -9,7 +9,6 @@ class Card extends React.Component {
     const { name, age, distance, text, pics } = data[i];
 
     return (
-
       <animated.div
         key={i}
         style={{
@@ -25,10 +24,23 @@ class Card extends React.Component {
             transform: interpolate([rot, scale], trans)
           }}
         >
-          <div>
+          <div
+            style={{
+              width: "18rem",
+              height: "20rem"
+            }}
+          >
             <Carousel>
               {pics.map((pic, index) => (
-                <img src={pic} key={index} alt="profilePicture" />
+                <img
+                  src={pic}
+                  key={index}
+                  style={{
+                    width: "100%",
+                    height: "100%"
+                  }}
+                  alt="profilePicture"
+                />
               ))}
             </Carousel>
             <h2 className="swipeh2">{name},</h2>

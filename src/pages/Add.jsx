@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Slider from "react-input-slider";
 import pets from "./swipe/dataSlot.json";
 
-export default function Edit() {
+export default function Add() {
   return (
     <div className="wrap">
       <div className="boxLeft">
@@ -48,7 +48,7 @@ function LeftBoxContent() {
             color: "white"
           }}
         >
-          Edit Pet
+          Add Pet
         </h2>
       </Navbar>
       <div className="mt-3 ml-2 mr-2">

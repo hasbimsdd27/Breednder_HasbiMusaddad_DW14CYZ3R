@@ -1,7 +1,7 @@
 .swipe {
   overscroll-behavior-y: contain;
   padding: 0;
-  height: 85vh;
+  height: 90vh;
   width: 68vw;
   user-select: none;
   font-family: Raleway, sans-serif;
@@ -11,8 +11,8 @@
 
 #swipe > div {
   position: absolute;
+  margin-top: 10vh;
   width: 70vw;
-  height: 80vh;
   will-change: transform;
   display: flex;
   align-items: center;
@@ -31,7 +31,7 @@
   max-height: 470px;
   will-change: transform;
   border-radius: 10px;
-  box-shadow: 0 12.5px 100px -10px rgba(50, 50, 73, 0.4),
+  box-shadow: 0 12.5px 20px -10px rgba(50, 50, 73, 0.4),
     0 10px 10px -10px rgba(50, 50, 73, 0.3);
 }
 
@@ -60,11 +60,11 @@ button[aria-label="next"] {
 .swipeh5 {
   margin-top: -1;
   margin-left: 2px;
-  color: lightgray;
+  color: rgb(65, 62, 62);
   font-size: 0.8rem;
 }
 .swipeh5:last-of-type {
-  color: darkgray;
+  color: rgb(32, 32, 32);
   font-size: 0.8rem;
 }
 
