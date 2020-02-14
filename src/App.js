@@ -1,29 +1,30 @@
-import React, { Component } from 'react';
-import './App.css';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
-import Landing from './pages/Landing';
+import React from "react";
+import "./App.css";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Landing from "./pages/Landing";
+import IndexAPP from "./pages/Index";
+import ProfileAPP from "./pages/Profile";
+import EditAPP from "./pages/Edit";
 
 export default function App() {
   return (
     <Router>
-        {/* A <Switch> looks through its children <Route>s and
+      {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
-        <Switch>
-          <Route path="/about">
-            <About />
-          </Route>
-          <Route path="/main">
-            <Main />
-          </Route>
-          <Route path="/">
-            <LandingPage />
-          </Route>
-        </Switch>
+      <Switch>
+        <Route path="/profile">
+          <Profile />
+        </Route>
+        <Route path="/main">
+          <Main />
+        </Route>
+        <Route path="/edit">
+          <Edit />
+        </Route>
+        <Route path="/">
+          <LandingPage />
+        </Route>
+      </Switch>
     </Router>
   );
 }
@@ -32,10 +33,14 @@ function LandingPage() {
   return <Landing />;
 }
 
-function About() {
-  return <h2>About</h2>;
+function Profile() {
+  return <ProfileAPP />;
 }
 
 function Main() {
-  return <h2>Main</h2>;
+  return <IndexAPP />;
+}
+
+function Edit() {
+  return <EditAPP />;
 }

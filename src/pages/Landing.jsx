@@ -1,33 +1,115 @@
-import React, { Component } from 'react';
-import { Button, Row, Col,Navbar, Nav, Jumbotron, Modal, Form, Card} from 'react-bootstrap';
+import React from 'react';
+import { Button, Row, Col,Navbar, Nav, Jumbotron, Modal, Form} from 'react-bootstrap';
+import {
+Link
+} from "react-router-dom";
 
-class Landing extends Component{
-    constructor(){
-        super()
-        this.state={
-            showLog:false,
-            showReg:false
-        }
-    }
+function ModalLog(props) {
+    return (
+      <Modal
+        {...props}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">
+          Login
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        <Form>
+            <Form.Group controlId="formBasicEmail">
+                <Form.Control type="email" placeholder="Enter email" name="email" />
+            </Form.Group>
+            <Form.Group controlId="formBasicPassword">
+                <Form.Control type="password" placeholder="Password" name="pass"/>
+            </Form.Group>
+            <Link to="/main"><Button variant="success" className="btn btn-block" type="Submit">
+            Login
+            </Button></Link>
+        </Form>
+        </Modal.Body>
+      </Modal>
+    );
+  }
 
-    handleOpenModalLog(){
-        this.setState({showLog: true})
-    }
 
-    handleCloseModalLog(){
-        this.setState({showLog:false})
-    }
-    handleOpenModalReg(){
-        this.setState({showReg: true})
-    }
+function ModalReg(props) {
+    return (
+      <Modal
+        {...props}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">
+          Login
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+            <Form>
+                <Form.Group>
+                    <Form.Control type="text" placeholder="Breeder" name="breeder"/>
+                </Form.Group>
+                <Form.Group>
+                    <Form.Control type="email" placeholder="Email" name="email"/>
+                </Form.Group>
+                <Form.Group>
+                    <Form.Control type="password" placeholder="Password" name="pass"/>
+                </Form.Group>
+                <Form.Group>
+                    <Form.Control type="text" placeholder="Phone Number" name="phone"/>
+                </Form.Group>
+                <Form.Group>
+                    <Form.Control type="text" placeholder="Breeder Address" name="address"/>
+                </Form.Group>
+                <Form.Group>
+                    <Form.Control type="text" placeholder="Pet Name" name="pet"/>
+                </Form.Group>
+                <Form.Group >
+                    <Row>
+                        <Col>
+                            <Form.Label>Pet Gender</Form.Label>
+                                <Form.Control as="select" name="gender">
+                                 <option>Male</option>
+                                 <option>Female</option>
+                            </Form.Control>
+                        </Col><Col>
+                            <Form.Label>Pet Age</Form.Label>
+                            <Form.Control as="select" name="age">
+                                <option>Young</option>
+                                <option>Adult</option>
+                                <option>Old</option>
+                            </Form.Control>
+                        </Col><Col>
+                            <Form.Label>Pet Species</Form.Label>
+                            <Form.Control as="select" name="species">
+                                 <option>Cat</option>
+                                 <option>Dog</option>
+                                 <option>Owl</option>
+                            </Form.Control>
+                        </Col>
+                    </Row>
+                </Form.Group>
+                <Link to="/main"><Button variant="success" className="btn btn-block" type="Submit">
+            Register
+            </Button></Link>
+        </Form>
+        </Modal.Body>
+      </Modal>
+    );
+  }
+  
+  export default function App() {
+    const [ modalShow,setModalShow] = React.useState(false);
+    const [ modalShow1,setModalShow1] = React.useState(false);
+  
+    return (
+      <>
 
-    handleCloseModalReg(){
-        this.setState({showReg:false})
-    }
-
-    render(){
-        return(
-           <div className="App-body">
+        <div className="App-body">
                <Navbar collapseOnSelect expand="lg" bg="transparent" variant="dark">
                     <Navbar.Brand href="#" className="App-tittle"><h2>Breednder</h2></Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -35,7 +117,7 @@ class Landing extends Component{
                         <Nav className="mr-auto">
                         </Nav>
                         <Nav>
-                        <Button className="App-btn" onClick={()=>{this.handleOpenModalLog()}}>Login</Button>
+                        <Button className="App-btn" onClick={() => setModalShow(true)}>Login</Button>
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
@@ -47,101 +129,26 @@ class Landing extends Component{
                             <p className ="App-text">
                                 by clicking enter, you agree to <u>our terms</u>. Learn how we process your data in our <u>Privacy Policy</u> and <u>Cookie Policy</u>
                             </p>
-                            <Button className="App-btn" onClick={()=>{this.handleOpenModalReg()}}>Register</Button>
+                            <Button className="App-btn" onClick={() => setModalShow1(true)}>Register</Button>
                         </div>
                 </Jumbotron>
 
                 <Navbar fixed="bottom" className="App-footer">
-                    <h6 className="App-footer-text text-center">Breednder © 2020</h6>
+                    <h6 className="App-footer-text text-center">Breednder © 2020 Made with Reactjs</h6>
                 </Navbar >
 
-                <Modal show={this.state.showLog} centered className="App-modal">
-                   
-                    <Modal.Header closeButton onClick={()=>{this.handleCloseModalLog()}}>
-                        <Modal.Title>Login</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                    
-                    <Form>
-                        <Form.Group controlId="formBasicEmail">
-                            <Form.Control type="email" placeholder="Enter email" />
-                        </Form.Group>
-
-                        <Form.Group controlId="formBasicPassword">
-                            <Form.Control type="password" placeholder="Password" />
-                        </Form.Group>
-                        <Button variant="success" className="btn btn-block" type="Submit">
-                            Login
-                        </Button>
-                      </Form>
-                    </Modal.Body>
-                    
-                </Modal>
-
-
-                <Modal show={this.state.showReg} centered className="App-modal">
-                    <Modal.Header closeButton onClick={()=>{this.handleCloseModalReg()}}>
-                    <Modal.Title>Register Your Pet</Modal.Title>
-                    </Modal.Header>
-
-                    <Modal.Body>
-                        <Form>
-                        <Form.Group>
-                            <Form.Control type="text" placeholder="Breeder" name="breeder"/>
-                        </Form.Group>
-                        <Form.Group>
-                            <Form.Control type="email" placeholder="Email" name="email"/>
-                        </Form.Group>
-                        <Form.Group>
-                            <Form.Control type="password" placeholder="Password" name="pass"/>
-                        </Form.Group>
-                        <Form.Group>
-                            <Form.Control type="text" placeholder="Phone Number" name="phone"/>
-                        </Form.Group>
-                        <Form.Group>
-                            <Form.Control type="text" placeholder="Breeder Address" name="address"/>
-                        </Form.Group>
-                        <Form.Group>
-                            <Form.Control type="text" placeholder="Pet Name" name="pet"/>
-                        </Form.Group>
-                        <Form.Group >
-                            <Row>
-                                <Col>
-                                <Form.Label>Pet Gender</Form.Label>
-                                <Form.Control as="select" name="gender">
-                                <option>Male</option>
-                                <option>Female</option>
-                                </Form.Control>
-                                </Col><Col>
-                                <Form.Label>Pet Age</Form.Label>
-                                <Form.Control as="select" name="age">
-                                <option>Young</option>
-                                <option>Adult</option>
-                                <option>Old</option>
-                                </Form.Control>
-                                </Col>
-                                <Col>
-                                <Form.Label>Pet Species</Form.Label>
-                                <Form.Control as="select" name="species">
-                                <option>Cat</option>
-                                <option>Dog</option>
-                                <option>Owl</option>
-                                </Form.Control>
-                                </Col>
-                            </Row>
-                        </Form.Group>
-                    
-                       
-
-                        <Button variant="success" className="btn btn-block" type="Submit">
-                            Register
-                        </Button>
-                      </Form>
-                    </Modal.Body>
-                </Modal>
+    
            </div>
-        )
-    }
-}
 
-export default Landing;
+        <ModalLog
+          show={modalShow}
+          onHide={() => setModalShow(false)}
+        />
+        <ModalReg
+          show={modalShow1}
+          onHide={() => setModalShow1(false)}
+        />
+      </>
+    );
+  }
+  

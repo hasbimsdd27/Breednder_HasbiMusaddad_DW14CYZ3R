@@ -1,21 +1,20 @@
-@import url('https://fonts.googleapis.com/css?family=Sriracha&display=swap');
-
+@import url("https://fonts.googleapis.com/css?family=Sriracha&display=swap");
 
 .App-body {
   background-image: url(./image/background.jpg);
   background-size: cover;
   background-position: center;
   min-height: 100vh;
-  font-family: 'Sriracha', cursive;
+  font-family: "Sriracha", cursive;
+  overflow: hidden;
 }
 
-
-.App-jumbotron{
+.App-jumbotron {
   margin-top: 1vh;
 }
 
-.App-Card-Content-Main{
-  background:rgba(44, 62, 80,0.3);
+.App-Card-Content-Main {
+  background: rgba(44, 62, 80, 0.3);
   width: 35vw;
   padding-top: 1vh;
   padding-left: 1vw;
@@ -27,39 +26,58 @@
   margin-top: 3vh;
 }
 
-.App-text{
+.App-text {
   font-size: 2vh;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   margin-bottom: 0vh;
 }
 
-
-.App-footer{
-  background:rgba(44, 62, 80,0.3);
+.App-footer {
+  background: rgba(44, 62, 80, 0.3);
 }
 
-.App-footer-text{
+.App-footer-text {
   color: white;
   padding-top: 1vh;
-  font-family: 'Roboto', sans-serif;
-
+  font-family: "Roboto", sans-serif;
 }
 
-.App-btn{
-  font-family: 'Roboto', sans-serif;
+.App-btn {
+  font-family: "Roboto", sans-serif;
 }
 
-.App-desc{
+.App-desc {
   color: white;
   font-size: 8vh;
 }
 
-.App-modal{
-  background: rgba(44, 62, 80,0.7);
-  font-family: 'Roboto', sans-serif;
+.App-modal {
+  background: rgba(44, 62, 80, 0.7);
+  font-family: "Roboto", sans-serif;
 }
 
-input, textarea{
-  background-color:#666;
-  color: #FFF;
+input,
+textarea {
+  background-color: #666;
+  color: #fff;
+}
+
+.card {
+  border: none !important;
+}
+
+.wrap {
+  display: flex;
+}
+.boxLeft {
+  height: 100vh;
+  width: 30vw;
+  background-color: #2f3640;
+  overflow-x: hidden;
+}
+.boxRight {
+  height: 100vh;
+  width: 70vw;
+  background-color: #dcdde1;
+  overflow-x: hidden;
 }
