@@ -143,21 +143,46 @@ function SliderInput() {
 }
 
 function PetProfile(props) {
-  const [showAdd, setShowAdd] = useState(false);
+  const [show, setShow] = useState(false);
+  const [showMessage, setShowMessage] = useState(false);
 
-  const handleClose = () => setShowAdd(false);
-  const handleShow = () => setShowAdd(true);
+  const [premium, setPremium] = useState(false);
 
   return (
     <div>
+      <Modal
+        show={showMessage}
+        onHide={() => {
+          setShowMessage(false);
+        }}
+      >
+        <Modal.Header closeButton></Modal.Header>
+        <Modal.Body className="text-center">
+          <h3>Your transaction is being processed, Please wait</h3>
+        </Modal.Body>
+      </Modal>
       <Row>
-        <Button
-          className="btn btn-success"
-          onClick={handleShow}
-          style={{ marginLeft: "63vw" }}
-        >
-          Add Pet
-        </Button>
+        {premium ? (
+          <Link to="/add">
+            <Button
+              className="btn btn-success"
+              style={{ marginLeft: "63vw" }}
+              onClick={() => {
+                setPremium(false);
+              }}
+            >
+              Add Pet
+            </Button>
+          </Link>
+        ) : (
+          <Button
+            className="btn btn-success"
+            onClick={() => setShow(true)}
+            style={{ marginLeft: "63vw" }}
+          >
+            Add Pet
+          </Button>
+        )}
       </Row>
       <div>
         <Card
@@ -225,7 +250,7 @@ function PetProfile(props) {
         </Card>
       </div>
 
-      <Modal show={showAdd} onHide={handleClose}>
+      <Modal show={show} onHide={() => setShow(false)}>
         <Modal.Header closeButton></Modal.Header>
         <Modal.Body>
           <h1 style={{ textAlign: "center" }}>
@@ -257,11 +282,16 @@ function PetProfile(props) {
 
         <Row className="mb-1">
           <Col className="text-center">
-            <Link to="/add">
-              <Button className="btn btn-success btn-lg" onClick={handleClose}>
-                Send
-              </Button>
-            </Link>
+            <Button
+              className="btn btn-success btn-lg"
+              onClick={() => {
+                setShowMessage(true);
+                setShow(false);
+                setPremium(true);
+              }}
+            >
+              Send
+            </Button>
           </Col>
         </Row>
       </Modal>
