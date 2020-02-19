@@ -21,6 +21,10 @@ module.exports = (sequelize, DataTypes) => {
       as: "petSpecies",
       foreignKey: "id"
     });
+    pet.belongsTo(models.user, {
+      as: "owner",
+      foreignKey: "id"
+    });
   };
   return pet;
 };
