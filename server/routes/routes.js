@@ -11,6 +11,8 @@ const {
   detailPet
 } = require("../controller/pet");
 
+const { detailUser, editUser, deleteUser } = require("../controller/user");
+
 router.post("/login", login);
 
 router.post("/register", register);
@@ -23,4 +25,8 @@ router.get("/pet", loadAllPet);
 router.patch("/pet/:id", auth, updatePet);
 router.get("/pet/:id", detailPet);
 router.delete("/pet/:id", auth, deletePet);
+
+router.get("/user/:id", detailUser);
+router.patch("/user/:id", auth, editUser);
+router.delete("/user/:id", auth, deleteUser);
 module.exports = router;
