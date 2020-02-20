@@ -118,39 +118,35 @@ exports.updatePet = async (req, res) => {
           { where: { id } }
         );
 
-        let petData2 = await Pet.findOne(
-          {
-            include: [
-              {
-                model: Species,
-                as: "petSpecies",
-                attributes: { exclude: ["createdAt", "updatedAt"] }
-              },
-              {
-                model: Age,
-                as: "petAge",
-                attributes: { exclude: ["createdAt", "updatedAt"] }
-              },
-              {
-                model: User,
-                as: "owner",
-                attributes: {
-                  exclude: ["email", "password", "createdAt", "updatedAt"]
-                }
-              }
-            ],
-            attributes: { exclude: ["species", "age", "breeder"] }
+        let petData2 = await Pet.findOne({
+          where: {
+            name,
+            gender,
+            species: spesies.id,
+            age: age.id,
+            breeder: user.id
           },
-          {
-            where: {
-              name,
-              gender,
-              species: spesies.id,
-              age: age.id,
-              breeder: user.id
+          include: [
+            {
+              model: Species,
+              as: "petSpecies",
+              attributes: { exclude: ["createdAt", "updatedAt"] }
+            },
+            {
+              model: Age,
+              as: "petAge",
+              attributes: { exclude: ["createdAt", "updatedAt"] }
+            },
+            {
+              model: User,
+              as: "owner",
+              attributes: {
+                exclude: ["email", "password", "createdAt", "updatedAt"]
+              }
             }
-          }
-        );
+          ],
+          attributes: { exclude: ["species", "age", "breeder"] }
+        });
 
         res.status(200).send(petData2);
       }
@@ -187,33 +183,31 @@ exports.deletePet = async (req, res) => {
 exports.detailPet = async (req, res) => {
   try {
     const { id } = req.params;
-    let petData = await Pet.findOne(
-      {
-        attributes: {
-          exclude: ["species", "age", "breeder"]
-        },
-        include: [
-          {
-            model: Species,
-            as: "petSpecies",
-            attributes: { exclude: ["createdAt", "updatedAt"] }
-          },
-          {
-            model: Age,
-            as: "petAge",
-            attributes: { exclude: ["createdAt", "updatedAt"] }
-          },
-          {
-            model: User,
-            as: "owner",
-            attributes: {
-              exclude: ["email", "password", "createdAt", "updatedAt"]
-            }
-          }
-        ]
+    let petData = await Pet.findOne({
+      where: { id },
+      attributes: {
+        exclude: ["species", "age", "breeder"]
       },
-      { where: { id } }
-    );
+      include: [
+        {
+          model: Species,
+          as: "petSpecies",
+          attributes: { exclude: ["createdAt", "updatedAt"] }
+        },
+        {
+          model: Age,
+          as: "petAge",
+          attributes: { exclude: ["createdAt", "updatedAt"] }
+        },
+        {
+          model: User,
+          as: "owner",
+          attributes: {
+            exclude: ["email", "password", "createdAt", "updatedAt"]
+          }
+        }
+      ]
+    });
     if (petData.id == id) {
       res.status(200).send(petData);
     } else {

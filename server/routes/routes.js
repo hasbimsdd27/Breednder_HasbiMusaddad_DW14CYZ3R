@@ -10,8 +10,13 @@ const {
   deletePet,
   detailPet
 } = require("../controller/pet");
-
 const { detailUser, editUser, deleteUser } = require("../controller/user");
+const {
+  checkMatch,
+  createMatch,
+  updateMatch,
+  getMatched
+} = require("../controller/match");
 
 router.post("/login", login);
 
@@ -29,4 +34,9 @@ router.delete("/pet/:id", auth, deletePet);
 router.get("/user/:id", detailUser);
 router.patch("/user/:id", auth, editUser);
 router.delete("/user/:id", auth, deleteUser);
+
+router.get("/match", auth, checkMatch);
+router.post("/match", auth, createMatch);
+router.patch("/match", auth, updateMatch);
+router.get("/matches", auth, getMatched);
 module.exports = router;

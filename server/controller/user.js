@@ -5,11 +5,11 @@ const User = models.user;
 exports.detailUser = async (req, res) => {
   try {
     const { id } = req.params;
-    let userData = await User.findOne(
-      { attributes: { exclude: ["email", "password"] } },
-      { where: { id } }
-    );
-    if (userData.id == id) {
+    let userData = await User.findOne({
+      where: { id },
+      attributes: { exclude: ["email", "password"] }
+    });
+    if (userData) {
       res.status(200).send(userData);
     } else {
       res.status(404).send({ message: "data not found" });
@@ -23,12 +23,8 @@ exports.editUser = async (req, res) => {
   try {
     const { id } = req.params;
     const { name, address, phone } = req.body;
-    let userData = await User.findOne(
-      { attributes: { exclude: ["email", "password"] } },
-      { where: { id } }
-    );
-
-    if (userData.id == id) {
+    let userData = await User.findOne({ where: { id } });
+    if (userData) {
       const updateUser = await User.update(
         {
           breeder: name,
@@ -38,10 +34,10 @@ exports.editUser = async (req, res) => {
         },
         { where: { id } }
       );
-      let userData = await User.findOne(
-        { attributes: { exclude: ["email", "password"] } },
-        { where: { breeder: name, address, phone } }
-      );
+      let userData = await User.findOne({
+        where: { breeder: name, address, phone },
+        attributes: { exclude: ["email", "password"] }
+      });
       res.status(200).send(userData);
     }
     res.status(404).send({ message: "data not found" });
