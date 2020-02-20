@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 const models = require("../models");
 const User = models.user;
 const Pet = models.pet;
+const Admin = models.admin;
 const bcrypt = require("bcrypt");
 
 exports.login = async (req, res) => {
@@ -67,6 +68,29 @@ exports.register = async (req, res) => {
     });
     console.log({ pet });
     res.status(200).send({ email: breederData.email, token });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+exports.loginAdmin = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const admin = await Admin.findOne({ where: { email } });
+    if (admin) {
+      let verifikasi = bcrypt.compareSync(password, admin.password);
+      if (verifikasi) {
+        const token = jwt.sign(
+          { admin_id: admin.id, admin_name: admin.name },
+          process.env.SECRET_KEY
+        );
+        res.status(200).send({ email: admin.email, token: token });
+      } else {
+        res.status(401).send({ message: "invalid login" });
+      }
+    } else {
+      res.status(401).send({ message: "invalid login" });
+    }
   } catch (err) {
     console.log(err);
   }

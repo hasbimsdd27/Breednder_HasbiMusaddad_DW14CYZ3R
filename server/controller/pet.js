@@ -31,7 +31,27 @@ exports.addPet = async (req, res) => {
         species: spesies.id,
         age: age.id,
         breeder: user.id
-      }
+      },
+      include: [
+        {
+          model: Species,
+          as: "petSpecies",
+          attributes: { exclude: ["createdAt", "updatedAt"] }
+        },
+        {
+          model: Age,
+          as: "petAge",
+          attributes: { exclude: ["createdAt", "updatedAt"] }
+        },
+        {
+          model: User,
+          as: "owner",
+          attributes: {
+            exclude: ["email", "password", "createdAt", "updatedAt"]
+          }
+        }
+      ],
+      attributes: { exclude: ["species", "age", "breeder"] }
     });
 
     const photoInput = await Photo.create({

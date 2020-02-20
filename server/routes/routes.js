@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const { login, register } = require("../controller/auth");
+const { login, register, loginAdmin } = require("../controller/auth");
 const { createSpecies, loadAllSpecies } = require("../controller/petSpecies");
-const { auth } = require("../middleware/auth");
+const { auth, authAdmin } = require("../middleware/auth");
 const {
   addPet,
   loadAllPet,
@@ -17,8 +17,10 @@ const {
   updateMatch,
   getMatched
 } = require("../controller/match");
+const { sendPayment, updatePayment } = require("../controller/payment");
 
 router.post("/login", login);
+router.post("/login/admin", loginAdmin);
 
 router.post("/register", register);
 
@@ -39,4 +41,7 @@ router.get("/match", auth, checkMatch);
 router.post("/match", auth, createMatch);
 router.patch("/match", auth, updateMatch);
 router.get("/matches", auth, getMatched);
+
+router.post("/payment", authAdmin, sendPayment);
+router.put("/payment/:id", authAdmin, updatePayment);
 module.exports = router;
