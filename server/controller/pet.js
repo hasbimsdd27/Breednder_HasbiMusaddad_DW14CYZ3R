@@ -183,3 +183,43 @@ exports.deletePet = async (req, res) => {
     console.log(err);
   }
 };
+
+exports.detailPet = async (req, res) => {
+  try {
+    const { id } = req.params;
+    let petData = await Pet.findOne(
+      {
+        attributes: {
+          exclude: ["species", "age", "breeder"]
+        },
+        include: [
+          {
+            model: Species,
+            as: "petSpecies",
+            attributes: { exclude: ["createdAt", "updatedAt"] }
+          },
+          {
+            model: Age,
+            as: "petAge",
+            attributes: { exclude: ["createdAt", "updatedAt"] }
+          },
+          {
+            model: User,
+            as: "owner",
+            attributes: {
+              exclude: ["email", "password", "createdAt", "updatedAt"]
+            }
+          }
+        ]
+      },
+      { where: { id } }
+    );
+    if (petData.id == id) {
+      res.status(200).send(petData);
+    } else {
+      res.status(404).send({ message: "data not found" });
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};

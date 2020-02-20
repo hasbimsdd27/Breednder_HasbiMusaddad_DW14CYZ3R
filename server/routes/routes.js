@@ -7,7 +7,8 @@ const {
   addPet,
   loadAllPet,
   updatePet,
-  deletePet
+  deletePet,
+  detailPet
 } = require("../controller/pet");
 
 router.post("/login", login);
@@ -20,5 +21,6 @@ router.get("/species", loadAllSpecies);
 router.post("/pet", auth, addPet);
 router.get("/pet", loadAllPet);
 router.patch("/pet/:id", auth, updatePet);
+router.get("/pet/:id", detailPet);
 router.delete("/pet/:id", auth, deletePet);
 module.exports = router;
