@@ -15,15 +15,15 @@ module.exports = (sequelize, DataTypes) => {
   pet.associate = function(models) {
     pet.belongsTo(models.age, {
       as: "petAge",
-      foreignKey: "id"
+      foreignKey: "age"
     });
     pet.belongsTo(models.species, {
       as: "petSpecies",
-      foreignKey: "id"
+      foreignKey: "species"
     });
     pet.belongsTo(models.user, {
       as: "owner",
-      foreignKey: "id"
+      foreignKey: "breeder"
     });
   };
   return pet;

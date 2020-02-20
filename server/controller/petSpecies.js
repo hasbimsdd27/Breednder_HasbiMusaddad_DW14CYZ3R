@@ -15,7 +15,7 @@ exports.createSpecies = async (req, res) => {
 exports.loadAllSpecies = async (req, res) => {
   try {
     const allSpecies = await Species.findAll();
-    res.send(allSpecies);
+    res.status(200).send(allSpecies);
   } catch (err) {
     console.log(err);
   }
