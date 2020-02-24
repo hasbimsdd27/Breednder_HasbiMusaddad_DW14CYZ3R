@@ -6,12 +6,13 @@ module.exports = {
       "users",
       [
         {
-          breeder: "spiderman-wannabe",
-          email: "",
+          breeder: "ironman",
+          email: "ironmen@ironmen.com",
           password:
-            "$2b$10$xBCMLNpXUymr6INiw4ktteyb6BjheltCDs7mcRR7kdi13B.KbJdhy",
+            "$2b$10$YngyX5nhyg8HlBPLQD8vFuNuKlFmKgE0H3kb2uXNb079idTbC1zMW",
           phone: "08112233445566",
           address: "Jl. in Dulu aja",
+          status: "admin",
           createdAt: new Date(),
           updatedAt: new Date()
         }

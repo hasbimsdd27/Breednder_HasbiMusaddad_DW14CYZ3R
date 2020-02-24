@@ -9,6 +9,16 @@ module.exports = {
           name: "Dog",
           createdAt: new Date(),
           updatedAt: new Date()
+        },
+        {
+          name: "Cat",
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
+        {
+          name: "Owl",
+          createdAt: new Date(),
+          updatedAt: new Date()
         }
       ],
       {}

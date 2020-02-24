@@ -68,7 +68,66 @@ exports.algoMatch = async (req, res) => {
       attributes: { exclude: ["pet", "pet_liked"] }
     });
 
-    if (!dataMatch) {
+    const dataMatched = await Match.findOne({
+      where: { pet: pet_id, pet_liked: pet_id_liked },
+      include: [
+        {
+          model: Pet,
+          as: "originPet",
+          attributes: {
+            exclude: ["createdAt", "updatedAt", "species", "age", "breeder"]
+          },
+          include: [
+            {
+              model: Species,
+              as: "petSpecies",
+              attributes: { exclude: ["createdAt", "updatedAt"] }
+            },
+            {
+              model: Age,
+              as: "petAge",
+              attributes: { exclude: ["createdAt", "updatedAt"] }
+            },
+            {
+              model: User,
+              as: "owner",
+              attributes: {
+                exclude: ["email", "password", "createdAt", "updatedAt"]
+              }
+            }
+          ]
+        },
+        {
+          model: Pet,
+          as: "likedPet",
+          attributes: {
+            exclude: ["createdAt", "updatedAt", "species", "age", "breeder"]
+          },
+          include: [
+            {
+              model: Species,
+              as: "petSpecies",
+              attributes: { exclude: ["createdAt", "updatedAt"] }
+            },
+            {
+              model: Age,
+              as: "petAge",
+              attributes: { exclude: ["createdAt", "updatedAt"] }
+            },
+            {
+              model: User,
+              as: "owner",
+              attributes: {
+                exclude: ["email", "password", "createdAt", "updatedAt"]
+              }
+            }
+          ]
+        }
+      ],
+      attributes: { exclude: ["pet", "pet_liked"] }
+    });
+
+    if (!dataMatch && !dataMatched) {
       const matchInput = await Match.create({
         pet: pet_id,
         pet_liked: pet_id_liked,

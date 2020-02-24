@@ -5,75 +5,78 @@ const Photo = models.photos;
 const User = models.user;
 const Species = models.species;
 const Age = models.age;
+const Payment = models.payment;
 
 exports.addPet = async (req, res) => {
-  const { name, gender, spesies, age, user, about_pet, photo } = req.body;
+  const { name, gender, spesies, age, about_pet, photo } = req.body;
   let datetime = new Date();
+  let user = req.user;
   try {
-    const petInput = await Pet.create({
-      name,
-      gender,
-      species: spesies.id,
-      age: age.id,
-      breeder: user.id,
-      about_pet,
-      createdAt: datetime,
-      updatedAt: datetime
+    const premium = await Payment.findOne({
+      where: { user }
     });
-    if (!petInput) {
-      throw new Error();
-    }
-
-    let petData = await Pet.findOne({
-      where: {
+    if (!premium || premium.status == "free") {
+      res.status(403).send({
+        message: "you are not premium user"
+      });
+    } else {
+      const petInput = await Pet.create({
         name,
         gender,
         species: spesies.id,
         age: age.id,
-        breeder: user.id
-      },
-      include: [
-        {
-          model: Species,
-          as: "petSpecies",
-          attributes: { exclude: ["createdAt", "updatedAt"] }
+        breeder: user,
+        about_pet,
+        createdAt: datetime,
+        updatedAt: datetime
+      });
+      if (!petInput) {
+        throw new Error();
+      }
+
+      let petData = await Pet.findOne({
+        where: {
+          name,
+          gender,
+          species: spesies.id,
+          age: age.id
         },
-        {
-          model: Age,
-          as: "petAge",
-          attributes: { exclude: ["createdAt", "updatedAt"] }
-        },
-        {
-          model: User,
-          as: "owner",
-          attributes: {
-            exclude: ["email", "password", "createdAt", "updatedAt"]
+        include: [
+          {
+            model: Species,
+            as: "petSpecies",
+            attributes: { exclude: ["createdAt", "updatedAt"] }
+          },
+          {
+            model: Age,
+            as: "petAge",
+            attributes: { exclude: ["createdAt", "updatedAt"] }
+          },
+          {
+            model: User,
+            as: "owner",
+            attributes: {
+              exclude: ["email", "password", "createdAt", "updatedAt"]
+            }
           }
-        }
-      ],
-      attributes: { exclude: ["species", "age", "breeder"] }
-    });
+        ],
+        attributes: { exclude: ["species", "age", "breeder"] }
+      });
 
-    const photoInput = await Photo.create({
-      pet: petData.id,
-      path: photo
-    });
+      const photoInput = await Photo.create({
+        pet: petData.id,
+        path: photo
+      });
 
-    if (!photoInput) {
-      throw new Error();
+      if (!photoInput) {
+        throw new Error();
+      }
+      let data = petData;
+      res.status(201).send({
+        message: "successfuly add pet",
+        data
+      });
     }
-
-    res.status(200).send({
-      name,
-      gender,
-      spesies,
-      age,
-      user,
-      about_pet,
-      photo,
-      createdAt: datetime,
-      updatedAt: datetime
-    });
   } catch (err) {
     console.log(err);
   }
@@ -113,7 +116,7 @@ exports.loadAllPet = async (req, res) => {
 exports.updatePet = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, gender, spesies, age, user, about_pet, photo } = req.body;
+    const { name, gender, spesies, age, about_pet, photo } = req.body;
     let dataPet = await Pet.findOne({
       where: { id }
     });
@@ -131,7 +134,6 @@ exports.updatePet = async (req, res) => {
             gender,
             species: spesies.id,
             age: age.id,
-            breeder: user.id,
             about_pet,
             updatedAt: new Date()
           },
@@ -144,7 +146,7 @@ exports.updatePet = async (req, res) => {
             gender,
             species: spesies.id,
             age: age.id,
-            breeder: user.id
+            breeder: req.user
           },
           include: [
             {
@@ -167,8 +169,8 @@ exports.updatePet = async (req, res) => {
           ],
           attributes: { exclude: ["species", "age", "breeder"] }
         });
-
-        res.status(200).send(petData2);
+        let data = petData2;
+        res.status(200).send({ message: "data successfully updated", data });
       }
     }
   } catch (err) {

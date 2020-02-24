@@ -9,6 +9,16 @@ module.exports = {
           name: "adult",
           createdAt: new Date(),
           updatedAt: new Date()
+        },
+        {
+          name: "child",
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
+        {
+          name: "old",
+          createdAt: new Date(),
+          updatedAt: new Date()
         }
       ],
       {}
